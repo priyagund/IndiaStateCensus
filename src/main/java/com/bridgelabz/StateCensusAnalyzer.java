@@ -47,7 +47,12 @@ public class StateCensusAnalyzer {
         }
 //        SortStateInOrder(indiaStateCensuses,STATE_CENSUS_DATA_CSV_FILE_PATH);
         //  SortStateByPopulation(indiaStateCensuses,STATE_CENSUS_DATA_CSV_FILE_PATH);
+<<<<<<< HEAD
         SortStateByDensityAndReport(indiaStateCensuses, STATE_CENSUS_DATA_CSV_FILE_PATH);
+=======
+      //  SortStateByDensityAndReport(indiaStateCensuses, STATE_CENSUS_DATA_CSV_FILE_PATH);
+        SortStateByAreaInSqkmAndReport(indiaStateCensuses,STATE_CENSUS_DATA_CSV_FILE_PATH);
+>>>>>>> uc5_sortByArea
         return indiaStateCensuses;
     }
 
@@ -89,6 +94,24 @@ public class StateCensusAnalyzer {
         }
         writeToJsonFile(indiaStateCensuses);
     }
+<<<<<<< HEAD
+=======
+
+    public void SortStateByAreaInSqkmAndReport(List<IndiaStateCensus> csvCensusList, String STATE_CENSUS_DATA_CSV_FILE_PATH) throws StateCensusAnalyzerException {
+        for (int i = 0; i < csvCensusList.size() - 1; i++) {
+            for (int j = 0; j < csvCensusList.size() - i - 1; j++) {
+                if (csvCensusList.get(j).getAreaInSqKm() < (csvCensusList.get(j + 1).getAreaInSqKm())) {
+                    IndiaStateCensus tempObj = csvCensusList.get(j);
+                    csvCensusList.set(j, csvCensusList.get(j + 1));
+                    csvCensusList.set(j + 1, tempObj);
+                }
+            }
+        }
+        writeToJsonFile(indiaStateCensuses);
+    }
+
+
+>>>>>>> uc5_sortByArea
 
     public void writeToJsonFile(List<IndiaStateCensus> list) {
         String filename = "/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/statecensusjson.json";
