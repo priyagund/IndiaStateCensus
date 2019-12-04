@@ -21,7 +21,7 @@ public class StateCensusAnalyzer {
 
     List<IndiaStateCensus> indiaStateCensuses = new ArrayList<>();
 
-    public int openCSVBuilder(String STATE_CENSUS_DATA_CSV_FILE_PATH) throws StateCensusAnalyzerException {
+    public List<IndiaStateCensus> openCSVBuilder(String STATE_CENSUS_DATA_CSV_FILE_PATH) throws StateCensusAnalyzerException {
         int count = 0;
         try {
             Reader reader = Files.newBufferedReader(Paths.get(STATE_CENSUS_DATA_CSV_FILE_PATH));
@@ -45,26 +45,15 @@ public class StateCensusAnalyzer {
             e.printStackTrace();
         }
 //        SortStateInOrder(indiaStateCensuses,STATE_CENSUS_DATA_CSV_FILE_PATH);
-        SortStateByPopulation(indiaStateCensuses,STATE_CENSUS_DATA_CSV_FILE_PATH);
-        return count;
+        //  SortStateByPopulation(indiaStateCensuses,STATE_CENSUS_DATA_CSV_FILE_PATH);
+        SortStateByDensityAndReport(indiaStateCensuses, STATE_CENSUS_DATA_CSV_FILE_PATH);
+        return indiaStateCensuses;
     }
 
     public void SortStateInOrder(List<IndiaStateCensus> csvCensusList, String STATE_CENSUS_DATA_CSV_FILE_PATH) throws StateCensusAnalyzerException {
         for (int i = 0; i < csvCensusList.size() - 1; i++) {
             for (int j = 0; j < csvCensusList.size() - i - 1; j++) {
-                if(csvCensusList.get(j).getStates().compareTo(csvCensusList.get(j + 1).getStates()) > 0) {
-                    IndiaStateCensus tempObj = csvCensusList.get(j);
-                    csvCensusList.set(j, csvCensusList.get(j + 1));
-                    csvCensusList.set(j + 1, tempObj);
-                }
-            }
-        }
-        writeToJsonFile(indiaStateCensuses);
-    }
-    public void SortStateByPopulation(List<IndiaStateCensus> csvCensusList,String STATE_CENSUS_DATA_CSV_FILE_PATH) throws StateCensusAnalyzerException {
-        for (int i = 0; i < csvCensusList.size() - 1; i++) {
-            for (int j = 0; j < csvCensusList.size() - i - 1; j++) {
-                if (csvCensusList.get(j).getPopulation()<(csvCensusList.get(j + 1).getPopulation()) ) {
+                if (csvCensusList.get(j).getStates().compareTo(csvCensusList.get(j + 1).getStates()) > 0) {
                     IndiaStateCensus tempObj = csvCensusList.get(j);
                     csvCensusList.set(j, csvCensusList.get(j + 1));
                     csvCensusList.set(j + 1, tempObj);
@@ -74,8 +63,34 @@ public class StateCensusAnalyzer {
         writeToJsonFile(indiaStateCensuses);
     }
 
-    public void writeToJsonFile(List<IndiaStateCensus> list){
-        String filename="/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/statecensusjson.json";
+    public void SortStateByPopulation(List<IndiaStateCensus> csvCensusList, String STATE_CENSUS_DATA_CSV_FILE_PATH) throws StateCensusAnalyzerException {
+        for (int i = 0; i < csvCensusList.size() - 1; i++) {
+            for (int j = 0; j < csvCensusList.size() - i - 1; j++) {
+                if (csvCensusList.get(j).getPopulation() < (csvCensusList.get(j + 1).getPopulation())) {
+                    IndiaStateCensus tempObj = csvCensusList.get(j);
+                    csvCensusList.set(j, csvCensusList.get(j + 1));
+                    csvCensusList.set(j + 1, tempObj);
+                }
+            }
+        }
+        writeToJsonFile(indiaStateCensuses);
+    }
+
+    public void SortStateByDensityAndReport(List<IndiaStateCensus> csvCensusList, String STATE_CENSUS_DATA_CSV_FILE_PATH) throws StateCensusAnalyzerException {
+        for (int i = 0; i < csvCensusList.size() - 1; i++) {
+            for (int j = 0; j < csvCensusList.size() - i - 1; j++) {
+                if (csvCensusList.get(j).getDensityPerSqKm() < (csvCensusList.get(j + 1).getDensityPerSqKm())) {
+                    IndiaStateCensus tempObj = csvCensusList.get(j);
+                    csvCensusList.set(j, csvCensusList.get(j + 1));
+                    csvCensusList.set(j + 1, tempObj);
+                }
+            }
+        }
+        writeToJsonFile(indiaStateCensuses);
+    }
+
+    public void writeToJsonFile(List<IndiaStateCensus> list) {
+        String filename = "/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/statecensusjson.json";
         Gson gson = new Gson();
         String json = gson.toJson(list);
         FileWriter fileWriter = null;
@@ -86,7 +101,6 @@ public class StateCensusAnalyzer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
-
-
 }
