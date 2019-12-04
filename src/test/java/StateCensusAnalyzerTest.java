@@ -28,4 +28,16 @@ public class StateCensusAnalyzerTest
             Assert.assertEquals(StateCensusAnalyzerException.ExceptionType.NO_SUCH_FILE, e.type);
         }
     }
+    @Test
+    public void check_StateCensusDataFile_WhenIncorrectFileType_TrowException() {
+
+        StateCensusAnalyzer stateAnalyser = new StateCensusAnalyzer();
+        try {
+            Assert.assertEquals(29,stateAnalyser.openCSVBuilder("/home/user/IdeaProjects/IndianStatesCensusAnalysers/src/main/java/com/stateinformation/com/StateCensusData.type"));
+        } catch (StateCensusAnalyzerException e) {
+            System.out.println("Exception is : "+ e.getMessage());
+            Assert.assertEquals(StateCensusAnalyzerException.ExceptionType.NO_SUCH_FILE, e.type);
+        }
+    }
+
 }
