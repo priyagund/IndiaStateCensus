@@ -9,7 +9,6 @@ import java.util.List;
 public class StateCensusAnalyzerTest
 {
 
-
     @Test
     public void check_StateCensusDataFile_ReturnHowMuchRecord() throws StateCensusAnalyzerException, StateCensusAnalyzerException {
 
