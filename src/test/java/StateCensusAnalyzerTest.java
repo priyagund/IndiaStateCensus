@@ -74,6 +74,20 @@ public class StateCensusAnalyzerTest {
             Assert.assertEquals(StateCensusAnalyzerException.ExceptionType.SOME_OTHER_FILE_ERROR, e.type);
         }
 
+    }
 
+
+    @Test
+    public void sortByPopulationCSVFile_toJsonFile_returnMostPopulerCity() throws StateCensusAnalyzerException {
+        StateCensusAnalyzer stateCensusAnalyzer=new StateCensusAnalyzer();
+        List<IndiaStateCensus> result = stateCensusAnalyzer.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCensus.csv");
+         Assert.assertEquals("Arunachal Pradesh",result.get(result.size()-1).getStates());
+    }
+
+    @Test
+    public void sortBYPopulation_toJsonFile_returnLeastPopulerCity() throws StateCensusAnalyzerException {
+        StateCensusAnalyzer stateCensusAnalyzer=new StateCensusAnalyzer();
+        List<IndiaStateCensus> result = stateCensusAnalyzer.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCensus.csv");
+         Assert.assertEquals("sikkim",result.get(0).getStates());
     }
 }
