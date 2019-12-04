@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="StateCensusAnalyzerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-04T06:36:58" hostname="admin165-desktop" time="0.115">
+  <properties/>
+  <testcase name="check_StateCensusDataFile_WhenIncorrectFileName_ThrowException" classname="StateCensusAnalyzerTest" time="0.115"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
