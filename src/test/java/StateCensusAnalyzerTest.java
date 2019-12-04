@@ -22,7 +22,7 @@ public class StateCensusAnalyzerTest
 
       StateCensusAnalyzer stateAnalyser = new StateCensusAnalyzer ();
         try {
-            Assert.assertEquals(29,stateAnalyser.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCensus.csv"));
+            Assert.assertEquals(29,stateAnalyser.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCen.csv"));
         } catch (StateCensusAnalyzerException e) {
             System.out.println("Exception is : "+ e.getMessage());
             Assert.assertEquals(StateCensusAnalyzerException.ExceptionType.NO_SUCH_FILE, e.type);
@@ -33,7 +33,7 @@ public class StateCensusAnalyzerTest
 
         StateCensusAnalyzer stateAnalyser = new StateCensusAnalyzer();
         try {
-            Assert.assertEquals(29,stateAnalyser.openCSVBuilder("/home/user/IdeaProjects/IndianStatesCensusAnalysers/src/main/java/com/stateinformation/com/StateCensusData.type"));
+            Assert.assertEquals(29,stateAnalyser.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCensus.json"));
         } catch (StateCensusAnalyzerException e) {
             System.out.println("Exception is : "+ e.getMessage());
             Assert.assertEquals(StateCensusAnalyzerException.ExceptionType.NO_SUCH_FILE, e.type);
@@ -45,7 +45,18 @@ public class StateCensusAnalyzerTest
 
         StateCensusAnalyzer stateAnalyser = new StateCensusAnalyzer();
         try {
-            Assert.assertEquals(29,stateAnalyser.openCSVBuilder("/home/user/IdeaProjects/IndianStatesCensusAnalysers/src/main/java/com/stateinformation/com/StateCensusData.csv"));
+            Assert.assertEquals(29,stateAnalyser.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCensus.csv"));
+        } catch (StateCensusAnalyzerException e) {
+            System.out.println("Exception is : "+ e.getMessage());
+            Assert.assertEquals(StateCensusAnalyzerException.ExceptionType.SOME_OTHER_FILE_ERROR, e.type);
+        }
+    }
+    @Test
+    public void check_StateCensusDataFile_WhenHeaderIncorrect_ThrowException() {
+
+        StateCensusAnalyzer stateAnalyser = new StateCensusAnalyzer();
+        try {
+            Assert.assertEquals(29,stateAnalyser.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCensus.csv"));
         } catch (StateCensusAnalyzerException e) {
             System.out.println("Exception is : "+ e.getMessage());
             Assert.assertEquals(StateCensusAnalyzerException.ExceptionType.SOME_OTHER_FILE_ERROR, e.type);

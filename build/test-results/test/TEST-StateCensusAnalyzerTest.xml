@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="StateCensusAnalyzerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-04T06:43:39" hostname="admin165-desktop" time="0.005">
+<testsuite name="StateCensusAnalyzerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-04T06:55:29" hostname="admin165-desktop" time="0.112">
   <properties/>
-  <testcase name="check_StateCensusDataFile_WhenIncorrectFileType_TrowException" classname="StateCensusAnalyzerTest" time="0.005"/>
-  <system-out><![CDATA[Exception is : please Enter proper file path or type 
-]]></system-out>
+  <testcase name="check_StateCensusDataFile_ReturnHowMuchRecord" classname="StateCensusAnalyzerTest" time="0.112"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
