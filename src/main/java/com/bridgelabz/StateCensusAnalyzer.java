@@ -3,6 +3,7 @@ package com.bridgelabz;
 import com.google.gson.Gson;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import sun.jvm.hotspot.utilities.Assert;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -43,14 +44,27 @@ public class StateCensusAnalyzer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        SortStateInOrder(indiaStateCensuses);
+//        SortStateInOrder(indiaStateCensuses,STATE_CENSUS_DATA_CSV_FILE_PATH);
+        SortStateByPopulation(indiaStateCensuses,STATE_CENSUS_DATA_CSV_FILE_PATH);
         return count;
     }
 
-    public void SortStateInOrder(List<IndiaStateCensus> csvCensusList) throws StateCensusAnalyzerException {
+    public void SortStateInOrder(List<IndiaStateCensus> csvCensusList, String STATE_CENSUS_DATA_CSV_FILE_PATH) throws StateCensusAnalyzerException {
         for (int i = 0; i < csvCensusList.size() - 1; i++) {
             for (int j = 0; j < csvCensusList.size() - i - 1; j++) {
-                if (csvCensusList.get(j).getStates().compareTo(csvCensusList.get(j + 1).getStates()) > 0) {
+                if(csvCensusList.get(j).getStates().compareTo(csvCensusList.get(j + 1).getStates()) > 0) {
+                    IndiaStateCensus tempObj = csvCensusList.get(j);
+                    csvCensusList.set(j, csvCensusList.get(j + 1));
+                    csvCensusList.set(j + 1, tempObj);
+                }
+            }
+        }
+        writeToJsonFile(indiaStateCensuses);
+    }
+    public void SortStateByPopulation(List<IndiaStateCensus> csvCensusList,String STATE_CENSUS_DATA_CSV_FILE_PATH) throws StateCensusAnalyzerException {
+        for (int i = 0; i < csvCensusList.size() - 1; i++) {
+            for (int j = 0; j < csvCensusList.size() - i - 1; j++) {
+                if (csvCensusList.get(j).getPopulation()<(csvCensusList.get(j + 1).getPopulation()) ) {
                     IndiaStateCensus tempObj = csvCensusList.get(j);
                     csvCensusList.set(j, csvCensusList.get(j + 1));
                     csvCensusList.set(j + 1, tempObj);
@@ -73,4 +87,6 @@ public class StateCensusAnalyzer {
             e.printStackTrace();
         }
     }
+
+
 }
