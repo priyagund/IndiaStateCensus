@@ -62,7 +62,7 @@ public class StateCensusAnalyzerTest {
             Assert.assertEquals(StateCensusAnalyzerException.ExceptionType.SOME_OTHER_FILE_ERROR, e.type);
         }
     }
- @Test
+    @Test
     public void sortSCVFile_ToJsonFile_ByAlphabaticalOrder() {
 
         StateCensusAnalyzer stateAnalyser = new StateCensusAnalyzer();
@@ -81,6 +81,7 @@ public class StateCensusAnalyzerTest {
     public void sortByPopulationCSVFile_toJsonFile_returnMostPopulerCity() throws StateCensusAnalyzerException {
         StateCensusAnalyzer stateCensusAnalyzer=new StateCensusAnalyzer();
         List<IndiaStateCensus> result = stateCensusAnalyzer.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCensus.csv");
+<<<<<<< HEAD
          Assert.assertEquals("Arunachal Pradesh",result.get(result.size()-1).getStates());
     }
 
@@ -89,5 +90,48 @@ public class StateCensusAnalyzerTest {
         StateCensusAnalyzer stateCensusAnalyzer=new StateCensusAnalyzer();
         List<IndiaStateCensus> result = stateCensusAnalyzer.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCensus.csv");
          Assert.assertEquals("sikkim",result.get(0).getStates());
+=======
+        Assert.assertEquals("Arunachal Pradesh",result.get(result.size()-1).getStates());
+    }
+
+    @Test
+    public void sortBYPopulation_toJsonFile_returnLeastPopulerCity() throws StateCensusAnalyzerException {
+        StateCensusAnalyzer stateCensusAnalyzer=new StateCensusAnalyzer();
+        List<IndiaStateCensus> result = stateCensusAnalyzer.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCensus.csv");
+        Assert.assertEquals("sikkim",result.get(0).getStates());
+    }
+
+    @Test
+    public void sortByDensity_tojsonFile_returnLeastDensity() throws StateCensusAnalyzerException {
+        StateCensusAnalyzer stateCensusAnalyzer=new StateCensusAnalyzer();
+        List<IndiaStateCensus> result = stateCensusAnalyzer.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCensus.csv");
+        Assert.assertEquals("Bihar",result.get(0).getStates());
+    }
+
+
+    @Test
+    public void sortByDensity_tojsonFile_returnHighDensity() throws StateCensusAnalyzerException {
+        StateCensusAnalyzer stateCensusAnalyzer=new StateCensusAnalyzer();
+        List<IndiaStateCensus> result = stateCensusAnalyzer.openCSVBuilder("/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/StateCensus.csv");
+        Assert.assertEquals("ArunachalPradesh",result.get(result.size()-1).getStates());
+>>>>>>> uc4_sortByDensity
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

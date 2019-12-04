@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="StateCensusAnalyzerTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2019-12-04T11:40:55" hostname="admin165-desktop" time="0.143">
   <properties/>
   <testcase name="sortBYPopulation_toJsonFile_returnLeastPopulerCity" classname="StateCensusAnalyzerTest" time="0.143">
@@ -6,6 +7,15 @@
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
 	at StateCensusAnalyzerTest.sortBYPopulation_toJsonFile_returnLeastPopulerCity(StateCensusAnalyzerTest.java:91)
+=======
+<testsuite name="StateCensusAnalyzerTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2019-12-04T12:15:39" hostname="admin165-desktop" time="0.149">
+  <properties/>
+  <testcase name="sortByDensity_tojsonFile_returnHighDensity" classname="StateCensusAnalyzerTest" time="0.149">
+    <failure message="org.junit.ComparisonFailure: expected:&lt;Arunachal[]Pradesh&gt; but was:&lt;Arunachal[ ]Pradesh&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;Arunachal[]Pradesh&gt; but was:&lt;Arunachal[ ]Pradesh&gt;
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at StateCensusAnalyzerTest.sortByDensity_tojsonFile_returnHighDensity(StateCensusAnalyzerTest.java:106)
+>>>>>>> uc4_sortByDensity
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
