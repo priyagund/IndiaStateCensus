@@ -40,4 +40,15 @@ public class StateCensusAnalyzerTest
         }
     }
 
+    @Test
+    public void check_StateCensusDataFile_WhenDelimiterIncorrect_ThrowException() {
+
+        StateCensusAnalyzer stateAnalyser = new StateCensusAnalyzer();
+        try {
+            Assert.assertEquals(29,stateAnalyser.openCSVBuilder("/home/user/IdeaProjects/IndianStatesCensusAnalysers/src/main/java/com/stateinformation/com/StateCensusData.csv"));
+        } catch (StateCensusAnalyzerException e) {
+            System.out.println("Exception is : "+ e.getMessage());
+            Assert.assertEquals(StateCensusAnalyzerException.ExceptionType.SOME_OTHER_FILE_ERROR, e.type);
+        }
+    }
 }
