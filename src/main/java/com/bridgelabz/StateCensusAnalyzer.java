@@ -3,9 +3,7 @@ package com.bridgelabz;
 import com.google.gson.Gson;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
-import sun.jvm.hotspot.utilities.Assert;
 
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
@@ -14,34 +12,29 @@ import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.Iterator;
 import java.util.List;
 
 public class StateCensusAnalyzer <T extends Comparable<T>> {
 
-    List<IndiaStateCensus> indiaStateCensuses = new ArrayList<>();
+    List<IndiaStateCensus> indiaStateCensuses ;
 
     public List<IndiaStateCensus> openCSVBuilder(String STATE_CENSUS_DATA_CSV_FILE_PATH,String methodName) throws StateCensusAnalyzerException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         int count = 0;
         try {
+
             Reader reader = Files.newBufferedReader(Paths.get(STATE_CENSUS_DATA_CSV_FILE_PATH));
             CsvToBean<IndiaStateCensus> cavToBean = new CsvToBeanBuilder(reader)
                     .withType(IndiaStateCensus.class)
                     .withIgnoreLeadingWhiteSpace(true)
+                    .withSeparator(',')
                     .build();
-
-            Iterator<IndiaStateCensus> csvUserIterator = cavToBean.iterator();
-            while (csvUserIterator.hasNext()) {
-                IndiaStateCensus csvUser = csvUserIterator.next();
-                indiaStateCensuses.add(csvUser);
-                count++;
-            }
-
+            indiaStateCensuses=cavToBean.parse();
         } catch (NoSuchFileException e) {
             throw new StateCensusAnalyzerException(StateCensusAnalyzerException.ExceptionType.NO_SUCH_FILE, "please Enter proper file path or type ");
         } catch (RuntimeException e) {
+
             throw new StateCensusAnalyzerException(StateCensusAnalyzerException.ExceptionType.SOME_OTHER_FILE_ERROR, "File Delimiter is incorrect or header is incorrect");
         } catch (IOException e) {
             e.printStackTrace();

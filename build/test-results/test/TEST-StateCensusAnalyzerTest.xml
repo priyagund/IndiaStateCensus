@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="StateCensusAnalyzerTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2019-12-04T13:39:18" hostname="admin165-desktop" time="0.124">
+<testsuite name="StateCensusAnalyzerTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2019-12-05T04:28:11" hostname="admin165-desktop" time="0.187">
   <properties/>
-  <testcase name="check_StateCensusDataFile_ReturnHowMuchRecord" classname="StateCensusAnalyzerTest" time="0.124">
-    <failure message="java.lang.NoSuchMethodException: com.bridgelabz.IndiaStateCensus.getState()" type="java.lang.NoSuchMethodException">java.lang.NoSuchMethodException: com.bridgelabz.IndiaStateCensus.getState()
-	at java.base/java.lang.Class.getDeclaredMethod(Class.java:2475)
-	at com.bridgelabz.StateCensusAnalyzer.SortByGeneric(StateCensusAnalyzer.java:57)
-	at com.bridgelabz.StateCensusAnalyzer.openCSVBuilder(StateCensusAnalyzer.java:49)
-	at StateCensusAnalyzerTest.check_StateCensusDataFile_ReturnHowMuchRecord(StateCensusAnalyzerTest.java:16)
+  <testcase name="sortBYPopulation_toJsonFile_returnLeastPopulerCity" classname="StateCensusAnalyzerTest" time="0.187">
+    <failure message="org.junit.ComparisonFailure: expected:&lt;[sikkim]&gt; but was:&lt;[Uttar Pradesh]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;[sikkim]&gt; but was:&lt;[Uttar Pradesh]&gt;
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at StateCensusAnalyzerTest.sortBYPopulation_toJsonFile_returnLeastPopulerCity(StateCensusAnalyzerTest.java:69)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
