@@ -18,12 +18,11 @@ import java.util.List;
 
 public class StateCensusAnalyzer <T extends Comparable<T>> {
 
-    List<IndiaStateCensus> indiaStateCensuses ;
-
-    public List<IndiaStateCensus> openCSVBuilder(String STATE_CENSUS_DATA_CSV_FILE_PATH,String methodName) throws StateCensusAnalyzerException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+      List<IndiaStateCensus> indiaStateCensuses ;
+     private String filename = "/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/statecensusjson.json";
+    public List<IndiaStateCensus> readDataFromCSV(String STATE_CENSUS_DATA_CSV_FILE_PATH,String methodName) throws StateCensusAnalyzerException {
         int count = 0;
         try {
-
             Reader reader = Files.newBufferedReader(Paths.get(STATE_CENSUS_DATA_CSV_FILE_PATH));
             CsvToBean<IndiaStateCensus> cavToBean = new CsvToBeanBuilder(reader)
                     .withType(IndiaStateCensus.class)
@@ -39,31 +38,40 @@ public class StateCensusAnalyzer <T extends Comparable<T>> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        SortByGeneric(indiaStateCensuses,methodName);
+
+            SortByField(indiaStateCensuses,methodName);
         return indiaStateCensuses;
     }
 
-    public void SortByGeneric(List<IndiaStateCensus> indiaStateCensuses,String methodName) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InvocationTargetException {
-        for(int i=0;i<indiaStateCensuses.size()-1;i++){
-            for(int j=0;j<indiaStateCensuses.size()-i-1;j++){
-                Class cls = indiaStateCensuses.get(j).getClass();
-                Method methodcall = cls.getDeclaredMethod(methodName);
-                T value1=(T)methodcall.invoke(indiaStateCensuses.get(j));
-                Class cls1 = indiaStateCensuses.get(j+1).getClass();
-                Method methodcall1 = cls1.getDeclaredMethod(methodName);
-                T value2=(T)methodcall1.invoke(indiaStateCensuses.get(j+1));
-                if(value1.compareTo(value2)<0){
-                    IndiaStateCensus tempObj=indiaStateCensuses.get(j);
-                    indiaStateCensuses.set(j,indiaStateCensuses.get(j+1));
-                    indiaStateCensuses.set(j+1,tempObj);
+    public void SortByField(List<IndiaStateCensus> indiaStateCensuses,String methodName) {
+                try {
+                    for(int i=0;i<indiaStateCensuses.size()-1;i++){
+                        for(int j=0;j<indiaStateCensuses.size()-i-1;j++){
+                            Class cls = indiaStateCensuses.get(j).getClass();
+                            Method methodcall = cls.getDeclaredMethod(methodName);
+                            T value1=(T)methodcall.invoke(indiaStateCensuses.get(j));
+                            Class cls1 = indiaStateCensuses.get(j+1).getClass();
+                            Method methodcall1 = cls1.getDeclaredMethod(methodName);
+                            T value2= null;
+                    value2 = (T)methodcall1.invoke(indiaStateCensuses.get(j+1));
+                    if(value1.compareTo(value2)<0){
+                        IndiaStateCensus tempObj=indiaStateCensuses.get(j);
+                        indiaStateCensuses.set(j,indiaStateCensuses.get(j+1));
+                        indiaStateCensuses.set(j+1,tempObj);
+                    }
                 }
             }
-        }
+        } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
         writeToJsonFile(indiaStateCensuses);
     }
 
-    public void writeToJsonFile(List<IndiaStateCensus> list) {
-        String filename = "/home/admin165/Desktop/Priya/IndianStateDataDemo/src/main/resources/statecensusjson.json";
+    private void writeToJsonFile(List<IndiaStateCensus> list) {
         Gson gson = new Gson();
         String json = gson.toJson(list);
         FileWriter fileWriter = null;
